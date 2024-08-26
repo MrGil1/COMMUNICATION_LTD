@@ -57,18 +57,9 @@ def signin():
         username = request.form.get('username')
         password = request.form.get('password')
 
-        user_data = fetch_user_data_from_db(username=username)
-        if user_data is None:
-            flash('User does not exist')
-            return redirect(url_for('signin'))
-
-        salt_bytes = bytes.fromhex(get_user_salt(user_id=user_data['user_id']))
-        signin_hashed_pwd = hashlib.pbkdf2_hmac(
-            'sha256', password.encode('utf-8'), salt_bytes, 100000)
-        user_hashed_password = bytes.fromhex(user_data['password'])
-
-        if user_hashed_password == signin_hashed_pwd:
-            session['username'] = username
+        user_data = fetch_user_data_from_db(username=username,password=password)
+        if user_data:
+            session['username'] =user_data["username"]
             session['user_id'] = user_data['user_id']
             failed_signin_attempts[request.remote_addr] = 0
             return redirect(url_for('dashboard'))
@@ -109,7 +100,7 @@ def register():
         new_password_hashed_hex, user_salt_hex = generate_new_password_hashed(new_password, generate_to_hex=True)
         add_new_user_to_db(
             new_username,
-            new_password_hashed_hex,
+            new_password,
             new_email,
             user_salt_hex)
         user_id = fetch_user_data_from_db(username=new_username)['user_id']
