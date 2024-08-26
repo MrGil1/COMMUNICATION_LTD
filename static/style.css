@@ -1,0 +1,118 @@
+h1, label, p {
+  color: #333;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.flashes, .flashes li, .success-message, h1, p {
+  text-align: center;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #68c7ff;
+  margin: 0;
+  padding: 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url("ComunicationLTD.png");
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: #333;
+}
+
+.signin-container {
+  width: 30vw;
+  margin: 50px auto;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0,0,0,.2);
+  background-color: rgba(255,255,255,.8);
+  backdrop-filter: blur(10px);
+}
+
+.success-message, form, h1 {
+  margin-bottom: 20px;
+}
+
+.success-message {
+  background-color: #9DDAA7;
+  color: #333;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+h1 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+label {
+  font-weight: 600;
+  margin-bottom: 5px;
+  display: block;
+}
+
+input[type=password], input[type=text] {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+button {
+  width: 100%;
+  padding: 12px 20px;
+  background-color: #01579b;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #01395a;
+}
+
+p a {
+  color: #01395a;
+  text-decoration: none;
+}
+
+p a:hover {
+  text-decoration: underline;
+}
+
+.flashes {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.flashes li {
+  color: red;
+  display: block;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.regions-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+}
+
+.checkbox input {
+  margin-right: 10px;
+}
