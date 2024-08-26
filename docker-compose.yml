@@ -1,0 +1,32 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: my_mysql_container
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}    #YourStrong!Passw0rd  # Replace with your actual root password ${MSSQL_SA_PASSWORD}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}          #YourStrong@Passw0rd
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./database:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -u root -p$MYSQL_ROOT_PASSWORD"]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+      timeout: 30s
+
+  web:
+    build: .
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"         #- "5678:5678"  # Expose the debug port
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}    #YourStrong!Passw0rd  # Replace with your actual root password ${MSSQL_SA_PASSWORD}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}          #YourStrong@Passw0rd
+    depends_on:
+      mysql:
+        condition: service_healthy
+    user: root
+    command: /bin/bash -c "python backend.py"
