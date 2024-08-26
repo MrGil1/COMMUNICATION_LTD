@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Add New Customer</title>
+    <link rel="icon" href="https://cdn.shopify.com/s/files/1/0567/6859/4117/files/CommunicationLTD_-_Favicon.png?v=1722971754" type="image/png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: rgba(255,255,255,.3);
+            margin: 0;
+            padding: 0;
+        }
+
+        label {
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #9AA39C;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #717672;
+        }
+        .back-button {
+            background-color: #337ab7;
+        }
+        .back-button:hover {
+            background-color: #286090;
+        }
+
+    </style>
+</head>
+<body>
+<div class="signin-container">
+    <h1>Add New Customer</h1>
+    <form method="POST" action="{{ url_for('add_new_customer') }}">
+        <label for="first_name">First Name:</label>
+        <input type="text" id="first_name" name="first_name" required>
+
+        <label for="last_name">Last Name:</label>
+        <input type="text" id="last_name" name="last_name" required>
+
+        <label for="region_id">Customer Region:</label>
+        <select id="region_id" name="region_id" required>
+
+            {% for region in regions %}
+            <option value="{{ region[1] }}">{{ region[0] }}</option>
+            {% endfor %}
+        </select>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="package_name">Internet Package Type:</label>
+        <select id="package_name" name="package_name" required>
+            <option value="Free">'Free', '1 Mbps', 0.00, 'Basic internet package with minimal speed.'</option>
+            <option value="Common">'Common', '10 Mbps', 10.00, 'Standard internet package suitable for basic browsing and streaming.'</option>
+            <option value="Rare">'Rare', '50 Mbps', 25.00, 'Enhanced internet package for high-speed browsing and HD streaming.'</option>
+			<option value="Epic">'Epic', '100 Mbps', 50.00, 'Premium internet package for heavy usage and multiple devices.'</option>
+			<option value="Legendary">'Legendary', '1 Gbps', 100.00, 'Ultimate internet package with top-tier speed and unlimited data.'</option>
+        </select>
+
+        <label for="ssn">ID:</label>
+        <input type="text" id="ssn" name="ssn" pattern="[0-9]{9}" required>
+
+        <label for="phone">phone number:</label>
+        <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" required>
+		
+		<label for="address">Address:</label>
+        <input type="text" id="address" name="address" required>
+		
+
+
+        <button type="submit">Add New Customer</button>
+    </form>
+    <form method="GET" action="{{ url_for('dashboard') }}">
+        <button class="back-button" type="submit">Back to Dashboard Page</button>
+    </form>
+</div>
+</body>
+</html>

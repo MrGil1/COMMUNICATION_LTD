@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Create New Account</title>
+    <link rel="icon" href="https://cdn.shopify.com/s/files/1/0567/6859/4117/files/CommunicationLTD_-_Favicon.png?v=1722971754" type="image/png">
+
+</head>
+<body>
+<div class="signin-container">
+    <h1>Welcome to Communication LTD</h1>
+    <form method="post" action="{{ url_for('register') }}">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <br><br>
+        <label for="publish_regions">Active Regions:</label>
+
+        <div class="regions-container">
+            {% for region in regions %}
+            <div class="checkbox">
+                <input type="checkbox" id="{{ region }}" name="publish_regions[]" value="{{ region }}">
+                <label for="{{ region }}">{{ region }}</label>
+            </div>
+            {% endfor %}
+        </div>
+        <br><br>
+        <button type="submit">Create New Account</button>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul class="flashes">
+            {% for message in messages %}
+            <li class="error_message">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+
+    </form>
+        <form method="GET" action="{{ url_for('signin') }}">
+        <button type="submit">Back to signin page</button>
+    </form>
+
+</div>
+</body>
+</html>
